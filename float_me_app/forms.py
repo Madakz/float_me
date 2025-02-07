@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.timezone import now
-from .models import FloatUser, Subscription, InvestmentPlan
+from .models import FloatUser, Subscription, InvestmentPlan, UserPaymentInfo
 
 # User registration class for forms
 class UserRegistrationForm(UserCreationForm):
@@ -134,3 +134,22 @@ class SubscriptionForm(forms.ModelForm):
             if amount <= 49.99:
                 raise forms.ValidationError("Investment amount must be equal to or greater than 50")
             return amount
+        
+# Add Bank Account form
+class AddBankAccountForm(forms.ModelForm):
+    class Meta:
+        model = UserPaymentInfo
+        fields = ['account_number', 'bank_name', 'account_name']
+
+        widgets = {
+            'account_number': forms.NumberInput(attrs={'placeholder': 'Account Number','class': 'form-control',}),
+            'bank_name': forms.TextInput(attrs={'placeholder': 'Bank Name', 'class': 'form-control'}),
+            'account_name': forms.TextInput(attrs={'placeholder': 'Account Name', 'class': 'form-control'})
+            
+        }
+
+        help_texts = {
+            'account_number': 'Enter your confirmed bank account number',
+            'bank_name': 'Enter your confirmed bank name',
+        }
+

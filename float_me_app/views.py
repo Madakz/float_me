@@ -14,7 +14,7 @@ from .forms import CustomPasswordResetForm
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from .models import Subscription, InvestmentPlan, Payment, Payout, FloatUser, Transaction, UserPaymentInfo, Notification
-from .forms import SubscriptionForm
+from .forms import SubscriptionForm, AddBankAccountForm
 import random
 import string
 from datetime import timedelta
@@ -471,7 +471,11 @@ def user_payouts(request):
 # add bank details
 @login_required
 def user_bank(request):
-    pass
+    if request.method == 'POST':
+        form = AddBankAccountForm(request.post)
+    else:
+        form = AddBankAccountForm()
+    return render(request, 'user_dashboard/add_bank.html', {'form': form})
 
 
 

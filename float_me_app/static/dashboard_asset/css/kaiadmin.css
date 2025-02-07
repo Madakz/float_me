@@ -1637,7 +1637,7 @@ body[data-background-color="dark"] .border-top {
     bottom: 0;
     width: calc(100% + 2px); }
   .card .card-action, .card-light .card-action {
-    padding: 30px;
+    padding: 10px;
     background-color: transparent;
     line-height: 30px;
     border-top: 1px solid #ebecec !important;
