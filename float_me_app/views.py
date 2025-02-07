@@ -266,7 +266,6 @@ def payout_matured_subscriptions(request, user_id, subscription_id, amount_paid)
     # Get the related user and subscription using url variables
     user_id = get_object_or_404(FloatUser, id=user_id)
     subscription = get_object_or_404(Subscription, id=subscription_id)
-    amount_paid=float(amount_paid)*2
     investment_plan = subscription.plan  # Subscription has a ForeignKey to InvestmentPlan
 
 
@@ -288,6 +287,10 @@ def payout_matured_subscriptions(request, user_id, subscription_id, amount_paid)
 
         #add 1 to payout_count only after checking the current_payout_count
         current_payout_count += 1
+        ''' amount_paid is recalculated so as to get the right payment for tuition A plan 
+            (tuition = 50, add the 3 terms tuition = 150. Divide amount by 2 = 75. invested 75. 
+            Now, multiply invested amount by 2 = 150 and divide by 3 = 50 to get the actual tuition for a term) '''
+        amount_paid=(float(amount_paid)*2)/3
 
         # Set the subscription to completed when payout_count is 3
         if current_payout_count == 3:
@@ -298,6 +301,8 @@ def payout_matured_subscriptions(request, user_id, subscription_id, amount_paid)
 
     # condition for rent or university support
     elif investment_plan.name.lower() in ['rent support', 'tuition support b']:
+        # double the amount paid
+        amount_paid=float(amount_paid)*2
         current_payout_count += 1
         subscription.status = "completed"
 
@@ -450,6 +455,23 @@ def subscribing(request):
 def user_subscriptions(request):
     subscriptions = Subscription.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'user_dashboard/subscriptions.html', {'subscriptions': subscriptions})
+
+# display user subscriptions
+@login_required
+def user_payments(request):
+    payments = Payment.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'user_dashboard/payments.html', {'payments': payments})
+
+# display user subscriptions
+@login_required
+def user_payouts(request):
+    payouts = Payout.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'user_dashboard/payouts.html', {'payouts': payouts})
+
+# add bank details
+@login_required
+def user_bank(request):
+    pass
 
 
 

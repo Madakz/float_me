@@ -1,0 +1,62 @@
+{% extends "user_dashboard/user_base.html" %}
+
+{% block title %} User Payouts {% endblock %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Payouts</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Plan</th> 
+                                    <th>Amount</th>
+                                    <th>Supposed Date</th> 
+                                    <th>Status</th>                                    
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Plan</th> 
+                                    <th>Amount</th>
+                                    <th>Supposed Date</th> 
+                                    <th>Status</th>                                    
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for payout in payouts %}
+                                <tr>
+                                    <td>{{ payout.subscription.plan }}</td>
+                                    <td>{{ payout.amount_paid }}</td>
+                                    <td>{{ payout.payout_date }}</td>
+                                    {% if payout.status == 'completed' %}
+                                    <td><span class="badge badge-success">{{ payout.status }}</span></td>  
+                                    {% else %}                                  
+                                    <td><span class="badge badge-warning">{{ payout.status }}</span></td>  
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

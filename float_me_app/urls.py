@@ -30,6 +30,9 @@ urlpatterns = [
     path('create_subscription/', views.subscribing, name='subscribe'),
     path('user_subscriptions/', views.user_subscriptions, name='user_subscriptions'),
     path('cancel_subscription/<int:subscription_id>', views.cancel_subscription, name="cancel_subscription"),
+    path('user_payments/', views.user_payments, name='my_payments'),
+    path('user_payouts/', views.user_payouts, name='my_payouts'),
+    path('add_bank_details', views.user_bank, name='add_bank'),
 
     # Admin activate subscription
     path('admin_dashboard/activate_subscription/<int:subscription_user_id>/<int:subscription_id>/<str:amount_paid>/', views.activate_subscription, name='activate_subscription'),
