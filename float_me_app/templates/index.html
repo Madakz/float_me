@@ -1,18 +1,808 @@
-{% extends "base.html" %}
 {% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %} Float Me {% endblock %}</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'front_page_assets/images/favicon.png' %}">
 
-{% block title %} float Me {% endblock %}
+    <!-- CSS
+    ============================================ -->
 
-{% block content %}
+    <!-- Icon Font CSS -->
+    <link rel="stylesheet" href="{% static 'front_page_assets/css/plugins/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'front_page_assets/css/plugins/flaticon.css' %}">
 
-    {% if user.is_authenticated %}
-        <p><a href="#">Account</a></p>
-        <p><a href="{% url 'logout' %}">Log Out</a></p>
-    {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'signin' %}">Log In</a> |
-        <a href="{% url 'signup' %}">Sign Up</a>
-    {% endif %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{% static 'front_page_assets/css/plugins/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'front_page_assets/css/plugins/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'front_page_assets/css/plugins/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'front_page_assets/css/plugins/magnific-popup.css' %}">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{% static 'front_page_assets/css/style.css' %}">
+
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+    <!-- <link rel="stylesheet" href="{% static 'front_page_assets/css/vendor/plugins.min.css' %}">
+    <link rel="stylesheet" href="{% static 'front_page_assets/css/style.min.css' %}"> -->
+
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+
+        <!-- Preloader start -->
+        <div id="preloader">
+            <div class="preloader">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- Preloader End -->
+
+        <!-- Header Start  -->
+        <div id="header" class="section header-section">
+
+            <div class="container">
+
+                <!-- Header Wrap Start  -->
+                <div class="header-wrap">
+
+                    <div class="header-logo">
+                        <a href="{% url 'landing_page' %}#"><img src="{% static 'front_page_assets/images/logo.png' %}" alt=""></a>
+                    </div>
+
+                    <div class="header-menu d-none d-lg-block">
+                        <ul class="main-menu">
+                            <li class="active-menu">
+                                <a href="{% url 'landing_page' %}#">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'aboutus' %}">About Us</a>
+                            </li>
+                            <li>
+                                <a href="#sub_plans">Plans</a>
+                            </li>
+                            <li>
+                                <a href="#faqs">Faqs</a>
+                            </li>
+                            <li><a href="{% url 'contact_us' %}">Contact</a></li>
+                            
+
+                            {% if user.is_authenticated %}
+                                <li>
+                                    <a href="{% url 'logout' %}">Log Out</a>
+                                </li>
+                            {% else %}
+                            <li>
+                                <a href="{% url 'signin' %}">Sign in</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <!-- Header Meta Start -->
+                    <div class="header-meta">
+                        <!-- Header Cart Start -->
+                        <div class="header-btn d-none d-xl-block">
+                            {% if user.is_authenticated %}
+                               
+                            <a class="btn" href="{% url 'user_dashboard' %}">Account</a>
+                                
+                            {% else %}
+                           
+                            <a class="btn" href="{% url 'signup' %}">Get Started</a>
+                            
+                            {% endif %}
+                            
+                        </div>
+                        <!-- Header Toggle Start -->
+                        <div class="header-toggle d-lg-none">
+                            <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                        <!-- Header Toggle End -->
+                    </div>
+                    <!-- Header Meta End  -->
+
+                </div>
+                <!-- Header Wrap End  -->
+
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <!-- Offcanvas Start-->
+        <div class="offcanvas offcanvas-start" id="offcanvasExample">
+            <div class="offcanvas-header">
+                <!-- Offcanvas Logo Start -->
+                <div class="offcanvas-logo">
+                    <a href="{% url 'landing_page' %}#"><img src="{% static 'front_page_assets/images/logo-white.png' %}" alt=""></a>
+                </div>
+                <!-- Offcanvas Logo End -->
+                <button type="button" class="close-btn" data-bs-dismiss="offcanvas"><i class="flaticon-close"></i></button>
+            </div>
+
+            <!-- Offcanvas Body Start -->
+            <div class="offcanvas-body">
+                <div class="offcanvas-menu">
+                    <ul class="main-menu">
+                        <li class="active-menu">
+                            <a href="{% url 'landing_page' %}#">Home</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'aboutus' %}">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#sub_plans">Plans</a>
+                        </li>
+                        <li>
+                            <a href="#faqs">Faqs</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'contact_us' %}">Contact</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'signin' %}">Sign in</a>
+                        </li>
+                        <li>
+                            <a class="btn" href="{% url 'signup' %}">Get Started</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Offcanvas Body End -->
+        </div>
+        <!-- Offcanvas End -->
+
+
+        <!-- Hero Start -->
+        <div class="section techwix-hero-section-03 d-flex align-items-center" style="background-image: url('{% static "front_page_assets/images/hero-bg3.jpg" %}');">
+            <div class="shape-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="944px" height="894px">
+                    <defs>
+                        <linearGradient id="PSgrad_0" x1="88.295%" x2="0%" y1="0%" y2="46.947%">
+                            <stop offset="0%" stop-color="rgb(67,186,255)" stop-opacity="1" />
+                            <stop offset="100%" stop-color="rgb(113,65,177)" stop-opacity="1" />
+                        </linearGradient>
+
+                    </defs>
+                    <path fill-rule="evenodd" fill="rgb(43, 142, 254)" d="M39.612,410.76 L467.344,29.823 C516.51,-13.476 590.638,-9.94 633.939,39.612 L914.192,317.344 C957.492,366.50 953.109,440.638 904.402,483.939 L476.671,864.191 C427.964,907.492 353.376,903.109 310.76,854.402 L29.823,576.670 C-13.477,527.963 -9.94,453.376 39.612,410.76 Z" />
+                    <path fill="url(#PSgrad_0)" d="M39.612,410.76 L467.344,29.823 C516.51,-13.476 590.638,-9.94 633.939,39.612 L914.192,317.344 C957.492,366.50 953.109,440.638 904.402,483.939 L476.671,864.191 C427.964,907.492 353.376,903.109 310.76,854.402 L29.823,576.670 C-13.477,527.963 -9.94,453.376 39.612,410.76 Z" />
+                </svg>
+            </div>
+            <div class="shape-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="726.5px" height="726.5px">
+                    <path fill-rule="evenodd" stroke="rgb(255, 255, 255)" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.302" fill="none" d="M28.14,285.269 L325.37,21.216 C358.860,-8.852 410.655,-5.808 440.723,28.14 L704.777,325.37 C734.846,358.860 731.802,410.654 697.979,440.723 L400.956,704.777 C367.133,734.845 315.338,731.802 285.269,697.979 L21.216,400.955 C-8.852,367.132 -5.808,315.337 28.14,285.269 Z" />
+                </svg>
+            </div>
+            <div class="shape-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="515px" height="515px">
+                    <defs>
+                        <linearGradient id="PSgrad_0" x1="0%" x2="89.879%" y1="0%" y2="43.837%">
+                            <stop offset="0%" stop-color="rgb(67,186,255)" stop-opacity="1" />
+                            <stop offset="100%" stop-color="rgb(113,65,177)" stop-opacity="1" />
+                        </linearGradient>
+
+                    </defs>
+                    <path fill-rule="evenodd" fill="rgb(43, 142, 254)" d="M19.529,202.281 L230.531,14.699 C254.559,-6.660 291.353,-4.498 312.714,19.529 L500.295,230.531 C521.656,254.559 519.493,291.353 495.466,312.714 L284.463,500.295 C260.436,521.656 223.641,519.493 202.281,495.466 L14.699,284.463 C-6.660,260.435 -4.498,223.641 19.529,202.281 Z" />
+                    <path fill="url(#PSgrad_0)" d="M19.529,202.281 L230.531,14.699 C254.559,-6.660 291.353,-4.498 312.714,19.529 L500.295,230.531 C521.656,254.559 519.493,291.353 495.466,312.714 L284.463,500.295 C260.436,521.656 223.641,519.493 202.281,495.466 L14.699,284.463 C-6.660,260.435 -4.498,223.641 19.529,202.281 Z" />
+                </svg>
+            </div>
+            <div class="shape-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="972.5px" height="970.5px">
+                    <path fill-rule="evenodd" stroke="rgb(255, 255, 255)" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none" d="M38.245,381.103 L435.258,28.158 C480.467,-12.32 549.697,-7.964 589.888,37.244 L942.832,434.257 C983.23,479.466 978.955,548.697 933.746,588.888 L536.733,941.832 C491.524,982.23 422.293,977.955 382.103,932.746 L29.158,535.733 C-11.32,490.524 -6.963,421.293 38.245,381.103 Z" />
+                </svg>
+            </div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <!-- Hero Content Start -->
+                        <div class="hero-content">
+                            <h3 class="sub-title" data-aos-delay="600" data-aos="fade-up">Float Me Support</h3>
+                            <h2 class="title" data-aos="fade-up" data-aos-delay="800">Smart Investments, Reliable Returns</h2>
+                            <p data-aos="fade-up" data-aos-delay="900">We turn your investments into financial security.
+                                We provide the most reliable and rewarding investment solutions, ensuring 100% returns for tuition fees and house rent</p>
+                            <div class="hero-btn" data-aos="fade-up" data-aos-delay="1000">
+                                <a class="btn" href="{% url 'aboutus' %}">Read More</a>
+                            </div>
+                        </div>
+                        <!-- Hero Content End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero End -->
+
+       
+
+        <!-- About Start -->
+        <div class="section techwix-about-section-04 section-padding">
+            <div class="shape-1"></div>
+            <div class="container">
+                <!-- About Wrapper Start -->
+                <div class="about-wrap">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- About Content Wrap Start -->
+                            <div class="about-content-wrap">
+                                <div class="section-title">
+                                    <h3 class="sub-title">Who we are</h3>
+                                    <h2 class="title">Relieve Financial Burden, Guarantee Financial Flexibility </h2>
+                                </div>
+                                <p class="text">
+                                    At Float Me, we are committed to providing innovative investment solutions that help ease financial burdens while offering potential returns. Our mission is to empower individuals and families by providing tuition fee support, rent assistance, and financial flexibility through strategic investment management.
+                                </p>
+                                <p class="text">
+                                    Founded on a vision conceived in 2019, Float Me underwent extensive market research and public evaluation in early 2023 before officially launching in the first quarter of 2025. Our model is designed to help clients retain financial stability by offering 100% repayment on their investment over a structured period.
+                                </p>                  
+                                <!-- About Author Info Wrap End -->
+                            </div>
+                            <!-- About Content Wrap End -->
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- About Image Wrap Start -->
+                            <div class="about-img-wrap">
+                                <div class="play-btn-02">
+                                    <a class="popup-video" href="#"><i class="fas fa-hands-helping"></i></a>
+                                </div>
+                                <div class="about-img about-img-big">
+                                    <img src="{% static 'front_page_assets/images/about-big2.jpg' %}" alt="">
+                                </div>
+                                <div class="about-img about-img-sm">
+                                    <img src="{% static 'front_page_assets/images/about-sm2.jpg' %}" alt="">
+                                </div>
+                            </div>
+                            <!-- About Image Wrap End -->
+                        </div>
+                    </div>
+                </div>
+                <!-- About Wrapper End -->
+            </div>
+        </div>
+        <!-- About End -->
+
+
+        <!-- Choose Us Start -->
+        <div class="section techwix-choose-us-section-02 section-padding-02" style="background-image: url('{% static "front_page_assets/images/bg/choose-us-bg2.jpg " %}');">
+            <div class="container">
+                <!-- Choose Us Wrap Start -->
+                <div class="choose-us-wrap">
+                    <div class="section-title text-center" style="margin-bottom: 25px;">
+                        <h3 class="sub-title">How it Works</h3> 
+                        <h2 class="title">Aid You Attain Financial Stability</h2>                                                           
+                    </div>           
+
+                    <div class="about-content-wrap" style="font-size: 17px;">
+                        <p class="text">
+                            <b>Tuition Fee Support</b>
+                        </p>
+                        <p class="text"> 
+                            ✔ Grade Level & High School
+                        </p>
+                        <p class="text"> 
+                            • Clients invest 50% of the total yearly tuition at least two months before the first payment is due. 
+                            • Payments are made directly to the provided account at the beginning of each term. 
+                        </p>
+                        <p class="text">
+                            Example: If your child's total tuition for three terms is $150 (Term 1 = $50, Term 2 = $50, Term 3 = $50), you will deposit $75 (i.e., $150 ÷ 2) at least two months before the first term payment. 
+                            Float Me will then pay $50 per term as scheduled. 
+                            Contracts end at the end of the academic year, and resubscription is required for the next session. 
+                        </p>
+                        <br>
+                        <p class="text">
+                            ✔ University/Polytechnic/College
+                        </p>
+                        <p class="text">
+                            • Clients invest 50% of their tuition fees at least five months before payment is due. 
+                            • Payments are made directly to the provided institution account as scheduled. 
+                        </p>
+                        <p class="text">    
+                            <b>Rent Assistance</b>                            
+                            Clients investing in rent support deposit 50% of their rental amount at least five months before payment is due. The full rent is then paid directly to the designated account when due.
+                        </p>    
+                    </div>       
+                    
+                </div>
+                <!-- Choose Us Wrap End -->
+            </div>
+        </div>
+        <!-- Choose Us End -->
+
+
+        <!-- Pricing Start -->
+        <div class="section techwix-pricing-section section-padding" id="sub_plans">
+            <div class="container">
+                <!-- Pricing Wrap Start -->
+                <div class="pricing-wrap">
+                    <div class="section-title text-center">
+                        <h3 class="sub-title">Support Plans</h3>
+                        <h2 class="title">Affordable plans for all</h2>
+                    </div>
+                    <div class="pricing-content-wrap">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <!-- Single Pricing Start -->
+                                <div class="single-pricing">
+                                    <div class="pricing-badge">
+                                        <span class="title">Tuition A Support</span>
+                                        <i>(Day care -secondary school/highschool)</i>
+                                    </div>
+                                    <div class="pricing-price">
+                                        <span class="currency">$</span>
+                                        <h3 class="price">50<span>Minimum</span></h3>
+                                    </div>
+                                    <div class="pricing-content">
+                                        <ul class="pricing-list">
+                                            <li>Fund us atleast 2 months before tuition fee payment</li>
+                                            <li>Fund us with half of your session tuition fee</li>
+                                            <li>We pay your tuition in full as at when due</li>
+                                        </ul>
+                                        <div class="pricing-btn">
+                                            <a class="btn" href="{% url 'signin' %}">Try Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Pricing End -->
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <!-- Single Pricing Start -->
+                                <div class="single-pricing active">
+                                    <div class="pricing-badge">
+                                        <span class="title">Tuition B Support</span>
+                                        <i style="color: #ffffff">(Uinversity/College/Polytechnic - A levels)</i>
+                                    </div>
+                                    <div class="pricing-price">
+                                        <span class="currency">$</span>
+                                        <h3 class="price">50<span>Minimum</span></h3>
+                                    </div>
+                                    <div class="pricing-content">
+                                        <ul class="pricing-list">
+                                            <li>Fund us 5 months to your Tuition fee payment</li>
+                                            <li>Fund us with half of your Tuition fee</li>
+                                            <li>We pay back your Tuition fee in full as at when due</li>
+                                        </ul>
+                                        <div class="pricing-btn">
+                                            <a class="btn" href="{% url 'signin' %}">Try Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Pricing End -->
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <!-- Single Pricing Start -->
+                                <div class="single-pricing">
+                                    <div class="pricing-badge">
+                                        <span class="title">Rent Support</span>
+                                        <i>(Apartment/Office/Shop)</i>
+                                    </div>
+                                    <div class="pricing-price">
+                                        <span class="currency">$</span>
+                                        <h3 class="price">50<span>Minimum</span></h3>
+                                    </div>
+                                    <div class="pricing-content">
+                                        <ul class="pricing-list">
+                                            <li>Fund us 5 months to your rent payment</li>
+                                            <li>Fund us with half of your rent</li>
+                                            <li>We pay back your rent in full as at when due</li>
+                                        </ul>
+                                        <div class="pricing-btn">
+                                            <a class="btn" href="{% url 'signin' %}">Try Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Pricing End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pricing Wrap End -->
+            </div>
+        </div>
+        <!-- Pricing End -->
+
+
+        <!-- Counter Start -->
+        <div class="section techwix-counter-section">
+            <div class="container">
+                <div class="counter-wrap">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <!-- Single Counter Start -->
+                            <div class="single-counter">
+                                <div class="counter-img">
+                                    <img src="{% static 'front_page_assets/images/counter-1.png' %}" alt="">
+                                </div>
+                                <div class="counter-content">
+                                    <span class="counter">1790</span>
+                                    <p>Happy clients</p>
+                                </div>
+                            </div>
+                            <!-- Single Counter End -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <!-- Single Counter Start -->
+                            <div class="single-counter">
+                                <div class="counter-img">
+                                    <img src="{% static 'front_page_assets/images/counter-2.png' %}" alt="">
+                                </div>
+                                <div class="counter-content">
+                                    <span class="counter">491</span>
+                                    <p>Finished projects</p>
+                                </div>
+                            </div>
+                            <!-- Single Counter End -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <!-- Single Counter Start -->
+                            <div class="single-counter">
+                                <div class="counter-img">
+                                    <img src="{% static 'front_page_assets/images/counter-3.png' %}" alt="">
+                                </div>
+                                <div class="counter-content">
+                                    <span class="counter">245</span>
+                                    <p>Skilled Experts</p>
+                                </div>
+                            </div>
+                            <!-- Single Counter End -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <!-- Single Counter Start -->
+                            <div class="single-counter">
+                                <div class="counter-img">
+                                    <img src="{% static 'front_page_assets/images/counter-1.png' %}" alt="">
+                                </div>
+                                <div class="counter-content">
+                                    <span class="counter">1090</span>
+                                    <p>Media Posts</p>
+                                </div>
+                            </div>
+                            <!-- Single Counter End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Counter End -->
+
+
+        <!-- Testimonial Start  -->
+        <div class="section techwix-testimonial-section-02 techwix-testimonial-section-03 section-padding-02">
+            <div class="container">
+                <!-- Testimonial Wrap Start  -->
+                <div class="testimonial-wrap-02">
+                    <div class="section-title text-center">
+                        <h3 class="sub-title">Testimonial</h3>
+                        <h2 class="title">20k+ satisfied clients worldwide</h2>
+                    </div>
+                    <div class="testimonial-content-wrap-02">
+                        <div class="swiper-container testimonial-02-active">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <!--  Single Testimonial Start  -->
+                                    <div class="single-testimonial-02">
+                                        <div class="testimonial-thumb">
+                                            <img src="{% static 'front_page_assets/images/testi-3.jpg' %}" alt="">
+                                        </div>
+                                        <div class="testimonial-content">
+                                            <img src="{% static 'front_page_assets/images/testi-icon.png' %}" alt="">
+                                            <p>Accelerate innovation with world-class tech teams Beyond more stoic this along goodness hey this this wow manatee </p>
+                                            <span class="name">Mike Holder </span>
+                                            <span class="designation"> / CEO, Harlond inc</span>
+                                        </div>
+                                    </div>
+                                    <!--  Single Testimonial End  -->
+                                </div>
+                                <div class="swiper-slide">
+                                    <!--  Single Testimonial Start  -->
+                                    <div class="single-testimonial-02">
+                                        <div class="testimonial-thumb">
+                                            <img src="{% static 'front_page_assets/images/testi-4.jpg' %}" alt="">
+                                        </div>
+                                        <div class="testimonial-content">
+                                            <img src="{% static 'front_page_assets/images/testi-icon.png' %}" alt="">
+                                            <p>Accelerate innovation with world-class tech teams Beyond more stoic this along goodness hey this this wow manatee </p>
+                                            <span class="name">Mike Fermalin </span>
+                                            <span class="designation"> / CEO, Harlond inc</span>
+                                        </div>
+                                    </div>
+                                    <!--  Single Testimonial End  -->
+                                </div>
+                                <div class="swiper-slide">
+                                    <!--  Single Testimonial Start  -->
+                                    <div class="single-testimonial-02">
+                                        <div class="testimonial-thumb">
+                                            <img src="{% static 'front_page_assets/images/testi-3.jpg' %}" alt="">
+                                        </div>
+                                        <div class="testimonial-content">
+                                            <img src="{% static 'front_page_assets/images/testi-icon.png' %}" alt="">
+                                            <p>Accelerate innovation with world-class tech teams Beyond more stoic this along goodness hey this this wow manatee </p>
+                                            <span class="name">Mike Holder </span>
+                                            <span class="designation"> / CEO, Harlond inc</span>
+                                        </div>
+                                    </div>
+                                    <!--  Single Testimonial End  -->
+                                </div>
+                            </div>
+
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial Wrap End  -->
+            </div>
+        </div>
+        <!-- Testimonial End  -->
+
+
+
+        <!-- Choose Us Start -->
+        <div class="section techwix-choose-us-section-02 section-padding-02" style="background-image: url('{% static "front_page_assets/images/bg/choose-us-bg2.jpg" %}');" id="faqs">
+            <div class="container">
+                <!-- Choose Us Wrap Start -->
+                <div class="choose-us-wrap">
+                    <div class="section-title text-center">
+                        <h3 class="sub-title">FAQS</h3> 
+                        <h2 class="title">Frequently Asked Questions</h2>                                                           
+                    </div>           
+
+                    <!-- Choose Us Right Start -->
+                    <div class="choose-us-right">
+                        <!-- Faq Accordion Start -->
+                        <div class="faq-accordion">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <div class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <span class="title">How Long it takes finished projects ?</span>
+                                        </button>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            Accelerate innovation with world-class tech teams We’ll match you to an entire remote team of incredible freelance talent for all your software.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <span class="title">Support & Policy rules?</span>
+                                        </button>
+                                    </div>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            We can help you channel your potential implementing your idea. We take care of all your needs, crafting specific and targeted solutions.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <span class="title">Can we get refund?</span>
+                                        </button>
+                                    </div>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            Accelerate innovation with world-class tech teams We’ll match you to an entire remote team of incredible freelance talent for all your software.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Faq Accordion End -->
+                    </div>
+                    <!-- Choose Us Right End -->                      
+                    
+                </div>
+                <!-- Choose Us Wrap End -->
+            </div>
+        </div>
+        <!-- Choose Us End -->
+
+
+        <!-- Cta Start -->
+        <div class="section techwix-cta-section-02">
+            <div class="container">
+                <!-- Cta Wrap Start -->
+                <div class="cta-wrap" style="background-image: url('{% static "front_page_assets/images/bg/cta-bg.jpg" %}');">
+                    <div class="row align-items-center">
+                        <div class="col-xl-9 col-lg-8">
+                            <!-- Cta Content Start -->
+                            <div class="cta-content">
+                                <div class="cta-icon">
+                                    <img src="{% static 'front_page_assets/images/cta-icon2.png' %}" alt="">
+                                </div>
+                                <p>We’re Delivering the best customer Experience</p>
+                            </div>
+                            <!-- Cta Content End -->
+                        </div>
+                        <div class="col-xl-3 col-lg-4">
+                            <!-- Cta Button Start -->
+                            <div class="cta-btn">
+                                <a class="btn btn-white" href="{% url 'landing_page' %}#">+44 920 090 505</a>
+                            </div>
+                            <!-- Cta Button End -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Cta Wrap End -->
+            </div>
+        </div>
+        <!-- Cta End -->
+
+
+
+
+
+        <!-- Footer Section Start -->
+        <div class="section footer-section footer-section-03" style="background-image: url('{% static "front_page_assets/images/bg/footer-bg.jpg" %}');">              
+
+            <div class="container">
+                <!-- Footer Widget Wrap Start -->
+                <div class="footer-widget-wrap">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <!-- Footer Widget Start -->
+                            <div class="footer-widget-about">
+                                <a class="footer-logo" href="{% url 'landing_page' %}#"><img src="{% static 'front_page_assets/images/logo-white.png' %}" alt="Logo"></a>
+                                <p>we are committed to providing innovative investment solutions that help ease financial burdens while offering potential returns.</p>
+                                <div class="footer-social">
+                                    <ul class="social">
+                                        <li><a href="login-register.html#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="login-register.html#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="login-register.html#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <!-- Footer Widget Start -->
+                            <div class="footer-widget">
+                                <h4 class="footer-widget-title">Useful Links</h4>
+
+                                <div class="widget-link">
+                                    <ul class="link">
+                                        <li><a href="login-register.html#">Terms & Conditions</a></li>
+                                        <li><a href="login-register.html#">About Company</a></li>
+                                        <li><a href="login-register.html#">Payment Gatway</a></li>
+                                        <li><a href="login-register.html#">Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <!-- Footer Widget Start -->
+                            <div class="footer-widget">
+                                <h4 class="footer-widget-title">Our Services</h4>
+
+                                <div class="widget-link">
+                                    <ul class="link">
+                                        <li><a href="login-register.html#">Data Security</a></li>
+                                        <li><a href="login-register.html#">IT Managment</a></li>
+                                        <li><a href="login-register.html#">Outsourcing</a></li>
+                                        <li><a href="login-register.html#">Networking</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <!-- Footer Widget Start -->
+                            <div class="footer-widget">
+                                <h4 class="footer-widget-title">Contact Information</h4>
+
+                                <div class="widget-info">
+                                    <ul>
+                                        <li>
+                                            <div class="info-icon">
+                                                <i class="flaticon-phone-call"></i>
+                                            </div>
+                                            <div class="info-text">
+                                                <span><a href="login-register.html#">+91 458 654 528</a></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="info-icon">
+                                                <i class="far fa-envelope-open"></i>
+                                            </div>
+                                            <div class="info-text">
+                                                <span><a href="login-register.html#">info@example.com</a></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="info-icon">
+                                                <i class="flaticon-pin"></i>
+                                            </div>
+                                            <div class="info-text">
+                                                <span>60 East 65th Street, NY</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Widget Wrap End -->
+            </div>
+
+            <!-- Footer Copyright Start -->
+            <div class="footer-copyright-area">
+                <div class="container">
+                    <div class="footer-copyright-wrap">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <!-- Footer Copyright Text Start -->
+                                <div class="copyright-text text-center">
+                                    <p>© Copyrights 2022 techwix All rights reserved. </p>
+                                </div>
+                                <!-- Footer Copyright Text End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Copyright End -->
+        </div>
+        <!-- Footer Section End -->
+
+        <!-- back to top start -->
+        <div class="progress-wrap">
+            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+            </svg>
+        </div>
+        <!-- back to top end -->
+
+    </div>
+
+    <!-- JS
+    ============================================ -->
+    <script src="{% static 'front_page_assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'front_page_assets/js/vendor/modernizr-3.11.2.min.js' %}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'front_page_assets/js/plugins/popper.min.js' %}"></script>
+    <script src="{% static 'front_page_assets/js/plugins/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins JS -->
+    <script src="{% static 'front_page_assets/js/plugins/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'front_page_assets/js/plugins/aos.js' %}"></script>
+    <script src="{% static 'front_page_assets/js/plugins/waypoints.min.js' %}"></script>
+    <script src="{% static 'front_page_assets/js/plugins/back-to-top.js' %}"></script>
+    <script src="{% static 'front_page_assets/js/plugins/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'front_page_assets/js/plugins/appear.min.js' %}"></script>
+    <script src="{% static 'front_page_assets/js/plugins/jquery.magnific-popup.min.js' %}"></script>
+
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+
+
+    <!-- Main JS -->
+    <script src="{% static 'front_page_assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
+
+
+
 
     
-{% endblock %}
+
+    

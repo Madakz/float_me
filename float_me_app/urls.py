@@ -7,6 +7,9 @@ from .views import CustomPasswordResetView
 
 urlpatterns = [
     path('', views.index, name='landing_page'),
+    path('about_us/', views.aboutus, name='aboutus'),
+
+    path('contact_us/', views.contactus, name = 'contact_us'),
     # user dashboard urls
     path('user/', views.home, name='user_dashboard'),
     # admin dashboard urls
@@ -32,7 +35,9 @@ urlpatterns = [
     path('cancel_subscription/<int:subscription_id>', views.cancel_subscription, name="cancel_subscription"),
     path('user_payments/', views.user_payments, name='my_payments'),
     path('user_payouts/', views.user_payouts, name='my_payouts'),
-    path('add_bank_details', views.user_bank, name='add_bank'),
+    path('add_bank_details/', views.user_bank, name='add_bank'),
+    path('user_bank_info/', views.user_bank_info, name='view_bank'),
+    path('user_bank_info_update/<int:bank_info_id>/', views.update_bank, name='update_bank_record'),
 
     # Admin activate subscription
     path('admin_dashboard/activate_subscription/<int:subscription_user_id>/<int:subscription_id>/<str:amount_paid>/', views.activate_subscription, name='activate_subscription'),

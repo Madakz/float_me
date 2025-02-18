@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} user login {% endblock %}
+
+
+{% block content %}
+
+    <!-- About Start -->
+    <div class="section techwix-about-section-07 section-padding" style="margin-top: 100px;">
+        <div class="shape-1"></div>
+        <div class="container">
+            <!-- About Wrapper Start -->
+            <div class="about-wrap">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- About Image Wrap Start -->
+                        <div class="about-img-wrap">
+                            <img class="shape-1" src="{% static 'front_page_assets/images/shape/about-shape2.png' %}" alt="">
+                            <div class="about-img">
+                                <img src="{% static 'front_page_assets/images/about-3.jpg' %}" alt="">
+                            </div>
+                            <div class="about-img about-img-2">
+                                <img src="{% static 'front_page_assets/images/about-4.jpg' %}" alt="">
+                            </div>
+                        </div>
+                        <!-- About Image Wrap End -->
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- About Content Wrap Start -->
+                        <div class="about-content-wrap">
+                            <div class="section-title">
+                                <h3 class="sub-title">Who we are</h3>
+                                <h2 class="title">Relieve Financial Burden, Guarantee Financial Flexibility.</h2>
+                            </div>
+                            <p class="text">
+                                At Float Me, we are committed to providing innovative investment solutions that help ease financial burdens while offering potential returns. Our mission is to empower individuals and families by providing tuition fee support, rent assistance, and financial flexibility through strategic investment management.
+                            </p>
+                            <p class="text">
+                                Founded on a vision conceived in 2019, Float Me underwent extensive market research and public evaluation in early 2023 before officially launching in the first quarter of 2025. Our model is designed to help clients retain financial stability by offering 100% repayment on their investment over a structured period.
+                            </p>                                 
+                        </div>
+                        <!-- About Content Wrap End -->
+                    </div>
+                </div>
+            </div>
+            <!-- About Wrapper End -->
+        </div>
+    </div>
+    <!-- About End -->
+
+    <!-- Choose Us Start -->
+    <div class="section techwix-choose-us-section-02 section-padding-02" style="background-image: url('{% static "front_page_assets/images/bg/choose-us-bg2.jpg " %}');">
+        <div class="container">
+            <!-- Choose Us Wrap Start -->
+            <div class="choose-us-wrap">
+                <div class="section-title text-center" style="margin-bottom: 25px;">
+                    <h3 class="sub-title">How it Works</h3> 
+                    <h2 class="title">Aid You Attain Financial Stability</h2>                                                           
+                </div>           
+
+                <div class="about-content-wrap" style="font-size: 17px;">
+                    <p class="text">
+                        <b>Tuition Fee Support</b>
+                    </p>
+                    <p class="text"> 
+                        ✔ Grade Level & High School
+                    </p>
+                    <p class="text"> 
+                        • Clients invest 50% of the total yearly tuition at least two months before the first payment is due. 
+                        • Payments are made directly to the provided account at the beginning of each term. 
+                    </p>
+                    <p class="text">
+                        Example: If your child's total tuition for three terms is $150 (Term 1 = $50, Term 2 = $50, Term 3 = $50), you will deposit $75 (i.e., $150 ÷ 2) at least two months before the first term payment. 
+                        Float Me will then pay $50 per term as scheduled. 
+                        Contracts end at the end of the academic year, and resubscription is required for the next session. 
+                    </p>
+                    <br>
+                    <p class="text">
+                        ✔ University/Polytechnic/College
+                    </p>
+                    <p class="text">
+                        • Clients invest 50% of their tuition fees at least five months before payment is due. 
+                        • Payments are made directly to the provided institution account as scheduled. 
+                    </p>
+                    <p class="text">    
+                        <b>Rent Assistance</b>                            
+                        Clients investing in rent support deposit 50% of their rental amount at least five months before payment is due. The full rent is then paid directly to the designated account when due.
+                    </p>    
+                </div>       
+                
+            </div>
+            <!-- Choose Us Wrap End -->
+        </div>
+    </div>
+    <!-- Choose Us End -->          
+
+        
+{% endblock %}

@@ -14,7 +14,7 @@ from .forms import CustomPasswordResetForm
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from .models import Subscription, InvestmentPlan, Payment, Payout, FloatUser, Transaction, UserPaymentInfo, Notification
-from .forms import SubscriptionForm, AddBankAccountForm
+from .forms import SubscriptionForm, BankAccountForm
 import random
 import string
 from datetime import timedelta
@@ -26,7 +26,13 @@ from django.db.models import F, Value, DecimalField
 def index(request):
     return render(request, 'index.html')
 
+#about us page
+def aboutus(request):
+    return render(request, 'about.html')
 
+#contact us page
+def contactus(request):
+    return render(request, 'contact.html')
 
 # superadmin homepage or dashboard
 def superadmin_dash(request):
@@ -387,6 +393,9 @@ def home(request):
     # All my Payouts
     payouts = Payout.objects.filter(user=user)
 
+    # bank details
+    bank_records = UserPaymentInfo.objects.filter(user = request.user)
+
     # Get all user unread notifications
     my_messages = Notification.objects.filter(user=user, status='sent')
 
@@ -402,6 +411,7 @@ def home(request):
         'subscriptions': subscriptions,
         'payments': payments,
         'payouts': payouts,
+        'bank_records': bank_records,
         'my_messages': my_messages,
     }
 
@@ -443,7 +453,7 @@ def subscribing(request):
                 subscription.maturity_date = subscription.start_date + timedelta(weeks=21)  # 5 months approx
 
             subscription.save()
-            messages.success(request, "Subscription created successfully, click activate to pay and activate subscription.")
+            messages.success(request, "Subscription is created successfully, click activate to pay and activate subscription.")
             return redirect('user_subscriptions')  # Redirect to a success page or dashboard
     else:
         form = SubscriptionForm()
@@ -471,12 +481,52 @@ def user_payouts(request):
 # add bank details
 @login_required
 def user_bank(request):
+    user = request.user
+
+     # Check if the user already has a bank record
+    existing_record = UserPaymentInfo.objects.filter(user=user).exists()
+
     if request.method == 'POST':
-        form = AddBankAccountForm(request.post)
+        form = BankAccountForm(request.POST)
+        if form.is_valid():
+            if existing_record:
+                return redirect('view_bank')  # Redirect if record exists
+            
+            # Save new record
+            payment_info = form.save(commit=False)
+            # get user who inputted the record
+            payment_info.user = user
+            payment_info.save()
+            messages.success(request, "Bank details saved successfully.")
+            return redirect('view_bank')
+
     else:
-        form = AddBankAccountForm()
+        form = BankAccountForm()
     return render(request, 'user_dashboard/add_bank.html', {'form': form})
 
+# view user bank details
+@login_required
+def user_bank_info(request):
+    bank_records = UserPaymentInfo.objects.filter(user = request.user)
+    return render(request, 'user_dashboard/bank_details.html', {'bank_records': bank_records})
+
+# update user bank user_bank_info
+@login_required
+def update_bank(request, bank_info_id):
+    # Get the existing record which matches the id
+    payment_info = get_object_or_404(UserPaymentInfo, id=bank_info_id)
+
+    if request.method == 'POST':
+        form = BankAccountForm(request.POST, instance=payment_info) #bind form with the record fetch
+        if form.is_valid():
+            form.saved()
+            messages.success("You bank details has been updated successfully")
+            return redirect('view_bank')    #redirect to bank details page
+        
+    else:
+        form = BankAccountForm(instance=payment_info)
+    
+    return render(request, 'user_dashboard/update_bank.html', {form: form}) #give the page with form to make changes 
 
 
 # cancel_subscription

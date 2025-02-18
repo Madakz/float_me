@@ -13,7 +13,7 @@
         {% if subscriptions %}
             <div class="ms-md-auto py-2 py-md-0">
                 <a href="{% url 'user_subscriptions' %}" class="btn btn-primary btn-round">Subscriptions</a>
-                <a href="#" class="btn btn-label-info btn-round me-2">Payouts</a>
+                <a href="{% url 'my_payouts' %}" class="btn btn-label-info btn-round me-2">Payouts</a>
             </div>
         {% endif %}
     </div>
@@ -36,10 +36,10 @@
                     </div>
                 </div>
                 <ul class="pricing-content">
-                    <li>Get your Tuition fee paid as at when due.</li>
-                    <li>Fund us <b>atleast 2 months</b> before tuition fee payment</li>                    
-                    <li>Fund us with half of your tuition fee</li>
-                    <li>We pay your tuition in full as at when due</li>
+                  <li>Get your Tuition fee paid as at when due.</li>
+                  <li>Fund us <b>atleast 2 months</b> before tuition fee payment</li>                    
+                  <li>Fund us with half of your session tuition fee</li>
+                  <li>We pay your tuition in full as at when due</li>
                 </ul>
                 <a  href="{% url 'subscribe' %}" class="btn btn-primary btn-border btn-lg w-75 fw-bold mb-3">Get started</a>
             </div>

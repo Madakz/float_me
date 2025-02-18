@@ -6708,7 +6708,7 @@ textarea:-ms-input-placeholder {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  padding-bottom: 400px;
+  padding-bottom: 100px;
   z-index: 1;
 }
 
@@ -6856,7 +6856,7 @@ textarea:-ms-input-placeholder {
 
 @media only screen and (max-width: 1199px) {
   .techwix-choose-us-section-02 {
-    padding-bottom: 350px;
+    padding-bottom: 100px;
   }
   .techwix-choose-us-section-02 .choose-us-left {
     padding-right: 0;
@@ -6865,7 +6865,7 @@ textarea:-ms-input-placeholder {
 
 @media only screen and (max-width: 991px) {
   .techwix-choose-us-section-02 {
-    padding-bottom: 330px;
+    padding-bottom: 100px;
   }
   .techwix-choose-us-section-02 .choose-us-right {
     padding-left: 0;

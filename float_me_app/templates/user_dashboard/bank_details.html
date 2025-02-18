@@ -1,0 +1,78 @@
+{% extends "user_dashboard/user_base.html" %}
+
+{% block title %} User Bank details {% endblock %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Account Details</h4>
+                        <!-- <a href="{# url 'update_bank_record' bank_records.id #}"><button class="btn btn-primary">Update Bank Details</button></a> -->
+                    
+
+
+                    {% if messages %}
+                        <ul class="messages" style="color:#31ce36; list-style-type: none; padding-top: 30px; padding-left: 0px;">
+                            {% for message in messages %}
+                                <li class="{{ message.tags }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Account Number</th>
+                                    <th>Bank Name</th>
+                                    <th>Account Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Account Number</th>
+                                    <th>Bank Name</th>
+                                    <th>Account Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for bank_record in bank_records%}
+                                <tr>
+                                    <td>{{ bank_record.account_number }}</td>
+                                    <td>{{ bank_record.bank_name }}</td>
+                                    <td>{{ bank_record.account_name }}</td>
+                                    <td>
+                                        <a href="{% url 'update_bank_record' bank_record.id %}">
+                                            <button class="btn btn-success">
+                                                <span class="btn-label">
+                                                    <i class="fa fa-pen"></i>
+                                                </span>
+                                                Edit
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>                               
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

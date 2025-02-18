@@ -136,7 +136,7 @@ class SubscriptionForm(forms.ModelForm):
             return amount
         
 # Add Bank Account form
-class AddBankAccountForm(forms.ModelForm):
+class BankAccountForm(forms.ModelForm):
     class Meta:
         model = UserPaymentInfo
         fields = ['account_number', 'bank_name', 'account_name']
@@ -151,5 +151,6 @@ class AddBankAccountForm(forms.ModelForm):
         help_texts = {
             'account_number': 'Enter your confirmed bank account number',
             'bank_name': 'Enter your confirmed bank name',
+            'account_name': 'Enter your confirmed account name',
         }
 

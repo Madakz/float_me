@@ -58,66 +58,32 @@
                     <div class="header-wrap">
 
                         <div class="header-logo">
-                            <a href="index.html"><img src="{% static 'front_page_assets/images/logo.png' %}" alt=""></a>
+                            <a href="{% url 'landing_page' %}"><img src="{% static 'front_page_assets/images/logo.png' %}" alt=""></a>
                         </div>
 
                         <div class="header-menu d-none d-lg-block">
                             <ul class="main-menu">
-                                <li>
-                                    <a href="index.html">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home Main</a></li>
-                                        <li><a href="index-2.html">AI Solutions</a></li>
-                                        <li><a href="index-3.html">Cyber Security</a></li>
-                                        <li><a href="index-4.html">IT Solutions</a></li>
-                                        <li><a href="index-5.html">Software Company</a></li>
-                                        <li><a href="index-6.html">IT Agency</a></li>
-                                    </ul>
+                                <li class="active-menu">
+                                    <a href="{% url 'landing_page' %}">Home</a>
                                 </li>
                                 <li>
-                                    <a href="about.html">Aboute Us</a>
+                                    <a href="{% url 'aboutus' %}">About Us</a>
                                 </li>
-                                <li class="active-menu"><a href="login-register.html#">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="team.html">Our Team</a></li>
-                                        <li><a href="service.html">Service</a></li>
-                                        <li><a href="choose-us.html">Why Choose Us</a></li>
-                                        <li><a href="testimonial.html">Testimonial</a></li>
-                                        <li><a href="pricing.html">Pricing</a></li>
-                                        <li class="active"><a href="login-register.html">Login & Register</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="{% url 'landing_page' %}#sub_plans">Plans</a>
                                 </li>
-                                <li><a href="login-register.html#">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">Blog Grid</a></li>
-                                        <li><a href="blog-standard.html">Blog List</a></li>
-                                        <li><a href="blog-details.html">Blog Single</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="{% url 'landing_page' %}#faqs">Faqs</a>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{% url 'contact_us' %}">Contact</a></li>
+                                <li>
+                                    <a href="{% url 'signin' %}">Sign in</a>
+                                </li>
                             </ul>
                         </div>
 
                         <!-- Header Meta Start -->
                         <div class="header-meta">
-                            <!-- Header Search Start -->
-                            <div class="header-search">
-                                <a class="search-btn" href="login-register.html#"><i class="flaticon-loupe"></i></a>
-                                <div class="search-wrap">
-                                    <div class="search-inner">
-                                        <i id="search-close" class="flaticon-close search-close"></i>
-                                        <div class="search-cell">
-                                            <form action="login-register.html#">
-                                                <div class="search-field-holder">
-                                                    <input class="main-search-input" type="search" placeholder="Search Your Keyword...">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Header Search End -->
-
                             <div class="header-btn d-none d-xl-block">
                                 <a class="btn" href="{% url 'signup' %}">Get Started</a>
                             </div>
@@ -145,7 +111,7 @@
                 <div class="offcanvas-header">
                     <!-- Offcanvas Logo Start -->
                     <div class="offcanvas-logo">
-                        <a href="index.html"><img src="{% static 'front_page_assets/images/logo-white.png' %}"> alt=""></a>
+                        <a href="{% url 'landing_page' %}"><img src="{% static 'front_page_assets/images/logo-white.png' %}"> alt=""></a>
                     </div>
                     <!-- Offcanvas Logo End -->
                     <button type="button" class="close-btn" data-bs-dismiss="offcanvas"><i class="flaticon-close"></i></button>
@@ -155,38 +121,27 @@
                 <div class="offcanvas-body">
                     <div class="offcanvas-menu">
                         <ul class="main-menu">
-                            <li>
-                                <a href="index.html">Home</a>
-                                <ul class="sub-menu">
-                                    <li><a href="index.html">Home Main</a></li>
-                                    <li><a href="index-2.html">AI Solutions</a></li>
-                                    <li><a href="index-3.html">Cyber Security</a></li>
-                                    <li><a href="index-4.html">IT Solutions</a></li>
-                                    <li><a href="index-5.html">Software Company</a></li>
-                                    <li><a href="index-6.html">IT Agency</a></li>
-                                </ul>
+                            <li class="active-menu">
+                                <a href="{% url 'landing_page' %}">Home</a>
                             </li>
                             <li>
-                                <a href="about.html">Aboute Us</a>
+                                <a href="{% url 'aboutus' %}">About Us</a>
                             </li>
-                            <li class="active-menu"><a href="login-register.html#">Pages</a>
-                                <ul class="sub-menu">
-                                    <li><a href="team.html">Our Team</a></li>
-                                    <li><a href="service.html">Service</a></li>
-                                    <li><a href="choose-us.html">Why Choose Us</a></li>
-                                    <li><a href="testimonial.html">Testimonial</a></li>
-                                    <li><a href="pricing.html">Pricing</a></li>
-                                    <li class="active"><a href="login-register.html">Login & Register</a></li>
-                                </ul>
+                            <li>
+                                <a href="{% url 'landing_page' %}#sub_plans">Plans</a>
                             </li>
-                            <li><a href="login-register.html#">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog.html">Blog Grid</a></li>
-                                    <li><a href="blog-standard.html">Blog List</a></li>
-                                    <li><a href="blog-details.html">Blog Single</a></li>
-                                </ul>
+                            <li>
+                                <a href="{% url 'landing_page' %}#faqs">Faqs</a>
                             </li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li>
+                                <a href="contact.html">Contact</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'signin' %}">Sign in</a>
+                            </li>
+                            <li>
+                                <a class="btn" href="{% url 'signup' %}">Get Started</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -204,6 +159,36 @@
 
             {% endblock %}
 
+             <!-- Cta Start -->
+            <div class="section techwix-cta-section-02 section-padding-02">
+                <div class="container">
+                    <!-- Cta Wrap Start -->
+                    <div class="cta-wrap" style="background-image: url('{% static "front_page_assets/images/bg/cta-bg.jpg" %}');">
+                        <div class="row align-items-center">
+                            <div class="col-xl-9 col-lg-8">
+                                <!-- Cta Content Start -->
+                                <div class="cta-content">
+                                    <div class="cta-icon">
+                                        <img src="{% static 'front_page_assets/images/cta-icon2.png' %}" alt="">
+                                    </div>
+                                    <p>We’re Delivering the best customer Experience</p>
+                                </div>
+                                <!-- Cta Content End -->
+                            </div>
+                            <div class="col-xl-3 col-lg-4">
+                                <!-- Cta Button Start -->
+                                <div class="cta-btn">
+                                    <a class="btn btn-white" href="login-register.html#">+234 920 090 505</a>
+                                </div>
+                                <!-- Cta Button End -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cta Wrap End -->
+                </div>
+            </div>
+            <!-- Cta End -->
+
 
             <!-- Footer Section Start -->
             <div class="section footer-section footer-section-03" style="background-image: url('{% static "front_page_assets/images/bg/footer-bg.jpg" %}');">              
@@ -216,7 +201,7 @@
                                 <!-- Footer Widget Start -->
                                 <div class="footer-widget-about">
                                     <a class="footer-logo" href="index.html"><img src="{% static 'front_page_assets/images/logo-white.png' %}" alt="Logo"></a>
-                                    <p>Accelerate innovation with world-class tech teams We’ll match you to an entire remote team of incredible freelance talent.</p>
+                                    <p>we are committed to providing innovative investment solutions that help ease financial burdens while offering potential returns.</p>
                                     <div class="footer-social">
                                         <ul class="social">
                                             <li><a href="login-register.html#"><i class="fab fa-facebook-f"></i></a></li>
