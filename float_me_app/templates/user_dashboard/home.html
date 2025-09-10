@@ -1,0 +1,621 @@
+{% extends 'user_dashboard/user_base.html' %}
+
+{% block title %} user home {% endblock %}
+
+{% block content %}
+
+    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+        <div>
+            <h3 class="fw-bold mb-3">{{ user.username }} Dashboard</h3>
+            <!-- <h6 class="op-7 mb-2">Free Bootstrap 5 Admin Dashboard</h6> -->
+        </div>
+        
+        {% if subscriptions %}
+            <div class="ms-md-auto py-2 py-md-0">
+                <a href="{% url 'user_subscriptions' %}" class="btn btn-primary btn-round">Subscriptions</a>
+                <a href="#" class="btn btn-label-info btn-round me-2">Payouts</a>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <h3 class="fw-bold mb-3">Support Plans</h3>
+    <div class="row justify-content-center align-items-center mb-5">
+
+        <div class="col-md-3 ps-md-0">
+            <div class="card-pricing2 card-primary">
+                <div class="pricing-header">
+                    <h3 class="fw-bold mb-3">Tuition A Support Plan</h3>
+                    <span class="sub-title">(Day care -secondary school/highschool)</span>
+                </div>
+                <div class="price-value">
+                    <div class="value">
+                        <span class="currency">$</span>
+                        <span class="amount">50</span>
+                        <span class="month">minimum</span>
+                    </div>
+                </div>
+                <ul class="pricing-content">
+                    <li>Get your Tuition fee paid as at when due.</li>
+                    <li>Fund us <b>atleast 2 months</b> before tuition fee payment</li>                    
+                    <li>Fund us with half of your tuition fee</li>
+                    <li>We pay your tuition in full as at when due</li>
+                </ul>
+                <a  href="{% url 'subscribe' %}" class="btn btn-primary btn-border btn-lg w-75 fw-bold mb-3">Get started</a>
+            </div>
+        </div>
+
+        <div class="col-md-3 ps-md-0 pe-md-0">
+            <div class="card-pricing2 card-success">
+                <div class="pricing-header">
+                    <h3 class="fw-bold mb-3">Tuition B Support Plan</h3>
+                    <span class="sub-title">(Uinversity/College/Polytechnic - A levels)</span>
+                </div>
+                <div class="price-value">
+                    <div class="value">
+                    <span class="currency">$</span>
+                    <span class="amount">50</span>
+                    <span class="month">minimum</span>
+                    </div>
+                </div>
+                <ul class="pricing-content">
+                    <li>Get your University Tuition fee paid as at when due.</li>
+                    <li>Fund us <b> 5 months</b> to your Tuition fee payment</li>                    
+                    <li>Fund us with half of your Tuition fee</li>
+                    <li>We pay back your Tuition fee in full as at when due</li>
+                </ul>
+              <a href="{% url 'subscribe' %}" class="btn btn-success btn-border btn-lg w-75 fw-bold mb-3">Get started</a
+              >
+            </div>
+        </div>
+
+        <div class="col-md-3 pe-md-0">
+            <div class="card-pricing2 card-secondary">
+                <div class="pricing-header">
+                    <h3 class="fw-bold mb-3">Rent Support Plan</h3>
+                    <span class="sub-title">(Apartment/Office/Shop)</span>
+                </div>
+                <div class="price-value">
+                <div class="value">
+                    <span class="currency">$</span>
+                    <span class="amount">50</span>
+                    <span class="month">minimum</span>
+                </div>
+                </div>
+                <ul class="pricing-content">
+                    <li>Get your rent paid as at when due.</li>
+                    <li>Fund us <b> 5 months</b> to your rent payment</li>                    
+                    <li>Fund us with half of your rent</li>
+                    <li>We pay back your rent in full as at when due</li>
+                </ul>
+                <a href="{% url 'subscribe' %}" class="btn btn-secondary btn-border btn-lg w-75 fw-bold mb-3">Get started</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="icon-big text-center">
+                    <i class="icon-pie-chart text-warning"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-stats">
+                  <div class="numbers">
+                    <p class="card-category">Pending Subscription(s)</p>
+                    <h4 class="card-title">{{ pending_subscriptions_count }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-6 col-md-3">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="icon-big text-center">
+                    <i class="icon-pie-chart text-success"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-stats">
+                  <div class="numbers">
+                    <p class="card-category">Active Subscription(s)</p>
+                    <h4 class="card-title">{{ active_subscriptions_count }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-6 col-md-3">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="icon-big text-center">
+                    <i class="icon-pie-chart text-primary"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-stats">
+                  <div class="numbers">
+                    <p class="card-category">Completed Subscription(s)</p>
+                    <h4 class="card-title">{{ completed_subscriptions_count }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-6 col-md-3">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="icon-big text-center">
+                    <i class="icon-close text-danger"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-stats">
+                  <div class="numbers">
+                    <p class="card-category">Cancelled Subscription(s)</p>
+                    <h4 class="card-title">{{ cancelled_subscriptions_count }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="icon-big text-center">
+                    <i class="icon-credit-card text-default"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-stats">
+                  <div class="numbers">
+                    <p class="card-category">My Successful Payment(s)</p>
+                    <h4 class="card-title">{{ successful_payments_count }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-6 col-md-3">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="icon-big text-center">
+                    <i class="icon-credit-card text-default"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-stats">
+                  <div class="numbers">
+                    <p class="card-category">My Failed Payment(s)</p>
+                    <h4 class="card-title">{{ failed_payments_count }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-6 col-md-3">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="icon-big text-center">
+                    <i class="icon-pie-chart text-success"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-stats">
+                  <div class="numbers">
+                    <p class="card-category">Pending Withdrawal(s)</p>
+                    <h4 class="card-title">{{ pending_payouts_count }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-6 col-md-3">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="icon-big text-center">
+                    <i class="icon-pie-chart text-success"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-stats">
+                  <div class="numbers">
+                    <p class="card-category">Successful Withdrawal(s)</p>
+                    <h4 class="card-title">{{ completed_payouts_count }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Subscriptions</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Sub Token</th>
+                                    <th>Amount</th>
+                                    <th>Plan</th>
+                                    <th>Start date</th>
+                                    <th>Maturity Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Sub Token</th>
+                                    <th>Amount</th>
+                                    <th>Plan</th>
+                                    <th>Start date</th>
+                                    <th>Maturity Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for subscription in subscriptions%}
+                                <tr>
+                                    <td>{{ subscription.sub_token }}</td>
+                                    <td>{{ subscription.amount_invested }}</td>
+                                    <td>{{ subscription.plan }}</td>
+                                    <td>{{ subscription.start_date }}</td>
+                                    <td>{{ subscription.maturity_date }}</td>
+                                    <td>
+                                        {% if subscription.status == 'active' %}
+                                        <span class="badge badge-primary">{{ subscription.status }}</span>
+                                        {% elif subscription.status == 'pending' %}
+                                        <span class="badge badge-warning">{{ subscription.status }}</span>
+                                        {% elif subscription.status == 'completed' %}
+                                        <span class="badge badge-success">{{ subscription.status }}</span>
+                                        {% elif subscription.status == 'cancelled' %}
+                                        <span class="badge badge-danger">{{ subscription.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if subscription.status == 'pending' %}
+                                            <div class="form-button-action">
+                                                <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#activateModal">Activate <i class="fa fa-play"></i></button>
+                                            </div>
+                                        {% elif subscription.status == 'active' %}
+                                            <div class="form-button-action">
+                                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelsub">Cancel <i class="fa fa-times"></i></button>                               
+                                            </div>
+                                        {% elif subscription.status == 'completed' %}
+                                            <div class="form-button-action">
+                                                <button class="btn btn-warning">Completed <i class="fa fa-check-circle"></i></button>
+                                            </div>
+                                        {% elif subscription.status == 'cancelled' %}
+                                            <div class="form-button-action">
+                                                <button class="btn btn-default">Cancelled <i class="fa fa-times"></i></button>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+
+                                    <!-- Activate subscription Modal -->
+                                    <div class="modal fade" id="activateModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-0">
+                                                    <h5 class="modal-title">
+                                                        <span class="fw-mediumbold"> Bank Details for Payment Activation</span>
+                                                        <!-- <span class="fw-light"> Make  </span> -->
+                                                    </h5>
+                                                    <button
+                                                        type="button"
+                                                        class="close close-modal"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close"
+                                                    >
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="small">
+                                                        Use the token for narration during payment and send a proof of payment to our admin to activate your plan
+                                                    </p>
+                                                    <form>
+                                                        <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group form-group-default">
+                                                            <label>Account Number</label>
+                                                            <input
+                                                                id="addName"
+                                                                type="text"
+                                                                class="form-control"
+                                                                value="0000000654657" disabled
+                                                            />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 pe-0">
+                                                            <div class="form-group form-group-default">
+                                                            <label>Bank Name</label>
+                                                            <input
+                                                                id="addPosition"
+                                                                type="text"
+                                                                class="form-control"
+                                                                value="Access Bank" disabled
+                                                            />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group form-group-default">
+                                                            <label>Account Name</label>
+                                                            <input
+                                                                id="addOffice"
+                                                                type="text"
+                                                                class="form-control"
+                                                                value="float me" disabled
+                                                            />
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer border-0">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-danger close-modal"
+                                                        data-dismiss="modal"
+                                                    >
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cancel subscription Modal -->
+                                    <div class="modal fade" id="cancelsub" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-0">
+                                                    <h5 class="modal-title">
+                                                        <!-- <span class="fw-mediumbold"> Bank Details for Payment Activation</span> -->
+                                                        <!-- <span class="fw-light"> Make  </span> -->
+                                                    </h5>
+                                                    <button
+                                                        type="button"
+                                                        class="close close-cancel-modal"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close"
+                                                    >
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- <p class="small">
+                                                        Cancel Subscription?
+                                                    </p> -->
+                                                    <h5><center>Cancel Subscription?</center></h5>
+                                                </div>
+                                                <div class="modal-footer border-0">
+                                                    <a href="{% url 'cancel_subscription' subscription.id %}">
+                                                        <button
+                                                            type="button"
+                                                            id="addRowButton"
+                                                            class="btn btn-success"
+                                                            >
+                                                            Confirm
+                                                        </button>
+                                                    </a>
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-danger close-cancel-modal"
+                                                        data-dismiss="modal"
+                                                    >
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Payments</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table
+                            id="today_matured-datatables"
+                            class="display table table-striped table-hover"
+                        >
+                            <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Reference</th>
+                                <th>Payment Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Reference</th>
+                                <th>Payment Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            {% for payment in payments %}
+                            <tr>
+                                <td>{{ payment.subscription.plan }}</td>
+                                <td>{{ payment.amount_paid }}</td>
+                                <td>{{ payment.transaction_reference }}</td>
+                                <td>{{ payment.created_at }}</td>
+                                {% if payment.payment_status == 'successful' %}
+                                <td><span class="badge badge-success">{{ payment.payment_status }}</span></td>
+                                {% else %}
+                                <td><span class="badge badge-danger">{{ payment.payment_status }}</span></td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Payouts</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table
+                            id="pending_payouts-filter-select"
+                            class="display table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Plan</th> 
+                                    <th>Amount</th>
+                                    <th>Supposed Date</th> 
+                                    <th>Status</th>                                    
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Plan</th> 
+                                    <th>Amount</th>
+                                    <th>Supposed Date</th>
+                                    <th>Status</th>                                    
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for payout in payouts %}
+                                <tr>
+                                    <td>{{ payout.subscription.plan }}</td>
+                                    <td>{{ payout.amount_paid }}</td>
+                                    <td>{{ payout.payout_date }}</td>
+                                    {% if payout.status == 'completed' %}
+                                    <td><span class="badge badge-success">{{ payout.status }}</span></td>  
+                                    {% else %}                                  
+                                    <td><span class="badge badge-warning">{{ payout.status }}</span></td>  
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+          <div class="card card-round">
+            <div class="card-body">
+              <div class="card-head-row card-tools-still-right">
+                <div class="card-title">Notifications</div>
+                <div class="card-tools">
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-icon btn-clean me-0"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <a class="dropdown-item" href="#">Unread notifications</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-list py-4">
+                {% for my_message in my_messages %}
+                <div class="item-list">
+                  <div class="avatar">
+                    <span
+                      class="avatar-title rounded-circle border border-white"
+                      >U</span
+                    >
+                  </div>
+                  <div class="info-user ms-3">
+                    <div class="username">{{ my_message.notification_type }}</div>
+                    <div class="status">{{ my_message.message }}</div>
+                  </div>
+                  <button class="btn btn-icon btn-link op-8 me-1">
+                    <i class="far fa-envelope"></i>
+                  </button>
+                  <button class="btn btn-icon btn-link btn-danger op-8">
+                    <i class="fas fa-ban"></i>
+                  </button>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+
+{% endblock %}
+

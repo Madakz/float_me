@@ -1,0 +1,23 @@
+{% extends "user_dashboard/user_base.html" %}
+
+{% block title %} plan subscrription {% endblock %}
+
+{% block content %}
+
+    <h3>Create new Subscription Support</h3>
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                {{ field }}
+            </div>
+
+        {% endfor %}
+        <div class="card-action">
+            <button class="btn btn-success">Submit</button>
+        </div>
+
+    </form>
+
+{% endblock %}

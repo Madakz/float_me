@@ -1,0 +1,226 @@
+{% extends "user_dashboard/user_base.html" %}
+
+{% block title %} User subscrriptions {% endblock %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Subscriptions</h4>
+                        <a href="{% url 'subscribe' %}"><button class="btn btn-primary">subscribe for a plan</button></a>
+                    
+
+
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li class="{{ message.tags }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Token</th>
+                                    <th>Plan</th>
+                                    <th>Amount</th>
+                                    <th>Start Date</th>
+                                    <th>Maturity Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Token</th>
+                                    <th>Plan</th>
+                                    <th>Amount</th>
+                                    <th>Start Date</th>
+                                    <th>Maturity Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {%for subscription in subscriptions%}
+                                <tr>
+                                    <td>{{ subscription.sub_token }}</td>
+                                    <td>{{ subscription.plan }}</td>
+                                    <td>{{ subscription.amount_invested }}</td>
+                                    <td>{{ subscription.start_date }}</td>
+                                    <td>{{ subscription.maturity_date }}</td>
+                                    <td>
+                                        {% if subscription.status == 'active' %}
+                                        <span class="badge badge-primary">{{ subscription.status }}</span>
+                                        {% elif subscription.status == 'pending' %}
+                                        <span class="badge badge-warning">{{ subscription.status }}</span>
+                                        {% elif subscription.status == 'completed' %}
+                                        <span class="badge badge-success">{{ subscription.status }}</span>
+                                        {% elif subscription.status == 'cancelled' %}
+                                        <span class="badge badge-danger">{{ subscription.status }}</span>
+                                    </td>
+                                    {% endif %}
+                                    <td>
+                                        {% if subscription.status == 'pending' %}
+                                            <div class="form-button-action">
+                                                <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#activateModal">Activate <i class="fa fa-play"></i></button>
+                                            </div>
+                                        {% elif subscription.status == 'active' %}
+                                            <div class="form-button-action">
+                                                <button class="btn btn-danger ms-auto" data-bs-toggle="modal" data-bs-target="#cancelsub">Cancel <i class="fa fa-times"></i></button>                               
+                                            </div>
+                                        {% elif subscription.status == 'completed' %}
+                                            <div class="form-button-action">
+                                                <button class="btn btn-warning">Completed <i class="fa fa-check-circle"></i></button>
+                                            </div>
+                                        {% elif subscription.status == 'cancelled' %}
+                                            <div class="form-button-action">
+                                                <button class="btn btn-default">Cancelled <i class="fa fa-times"></i></button>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+
+                                <!-- Activate subscription Modal -->
+                                    <div class="modal fade" id="activateModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-0">
+                                                    <h5 class="modal-title">
+                                                        <span class="fw-mediumbold"> Bank Details for Payment Activation</span>
+                                                        <!-- <span class="fw-light"> Make  </span> -->
+                                                    </h5>
+                                                    <button
+                                                        type="button"
+                                                        class="close close-modal"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close"
+                                                    >
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="small">
+                                                        Use the token for narration during payment and send a proof of payment to our admin to activate your plan
+                                                    </p>
+                                                    <form>
+                                                        <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group form-group-default">
+                                                            <label>Account Number</label>
+                                                            <input
+                                                                id="addName"
+                                                                type="text"
+                                                                class="form-control"
+                                                                value="0000000654657" disabled
+                                                            />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 pe-0">
+                                                            <div class="form-group form-group-default">
+                                                            <label>Bank Name</label>
+                                                            <input
+                                                                id="addPosition"
+                                                                type="text"
+                                                                class="form-control"
+                                                                value="Access Bank" disabled
+                                                            />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group form-group-default">
+                                                            <label>Account Name</label>
+                                                            <input
+                                                                id="addOffice"
+                                                                type="text"
+                                                                class="form-control"
+                                                                value="float me" disabled
+                                                            />
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer border-0">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-danger close-modal"
+                                                        data-dismiss="modal"
+                                                    >
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cancel subscription Modal -->
+                                    <div class="modal fade" id="cancelsub" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-0">
+                                                    <h5 class="modal-title">
+                                                        <!-- <span class="fw-mediumbold"> Bank Details for Payment Activation</span> -->
+                                                        <!-- <span class="fw-light"> Make  </span> -->
+                                                    </h5>
+                                                    <button
+                                                        type="button"
+                                                        class="close close-cancel-modal"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close"
+                                                    >
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- <p class="small">
+                                                        Cancel Subscription?
+                                                    </p> -->
+                                                    <h5><center>Cancel Subscription?</center></h5>
+                                                </div>
+                                                <div class="modal-footer border-0">
+                                                    <a href="{% url 'cancel_subscription' subscription.id %}">
+                                                        <button
+                                                            type="button"
+                                                            id="addRowButton"
+                                                            class="btn btn-success"
+                                                            >
+                                                            Confirm
+                                                        </button>
+                                                    </a>
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-danger close-cancel-modal"
+                                                        data-dismiss="modal"
+                                                    >
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

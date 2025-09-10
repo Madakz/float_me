@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} user login {% endblock %}
+
+
+{% block content %}
+    <!-- Login & Register Start -->
+    <div class="section login-register-section section-padding-04">
+        <div class="container">
+
+            <!-- Login & Register Wrapper Start -->
+            <div class="login-register-wrap">
+                <div class="row gx-5">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+
+                        <!-- Login & Register Box Start -->
+                        <div class="login-register-box">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h2 class="title">Login</h2>
+                            </div>
+                            <!-- Section Title End -->
+
+                            <div class="login-register-form"></div>
+                                {% if form.errors %}
+                                    <p class="text-danger">Invalid username or password</p>
+                                {% endif %}
+                                <form method="post">
+                                    {% csrf_token %}
+
+                                    {% for field in form %}
+                                        <div class="single-form">
+                                            {{ field }}
+                                        </div>
+                                        <br>
+
+                                    {% endfor %}
+
+                                
+
+                                    
+                                    <div class="form-btn">
+                                        <button class="btn">Login</button>
+                                    </div>
+                                    <div class="single-form">
+                                        <p><a href="{% url 'password_reset' %}">Lost your password?</a></p>
+                                        <p><a href="{% url 'signup' %}">Don't have an account? Sign up</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        <!-- Login & Register Box End -->
+
+                    </div>
+                    <div class="col-lg-3"></div>
+                    
+                </div>
+            </div>
+            <!-- Login & Register Wrapper End -->
+
+        </div>
+    </div>
+    <!-- Login & Register End -->
+
+
+
+    <!-- Cta Start -->
+    <div class="section techwix-cta-section-02 section-padding-02">
+        <div class="container">
+            <!-- Cta Wrap Start -->
+            <div class="cta-wrap" style="background-image: url('{% static "front_page_assets/images/bg/cta-bg.jpg" %}');">
+                <div class="row align-items-center">
+                    <div class="col-xl-9 col-lg-8">
+                        <!-- Cta Content Start -->
+                        <div class="cta-content">
+                            <div class="cta-icon">
+                                <img src="{% static 'front_page_assets/images/cta-icon2.png' %}" alt="">
+                            </div>
+                            <p>We’re Delivering the best customer Experience</p>
+                        </div>
+                        <!-- Cta Content End -->
+                    </div>
+                    <div class="col-xl-3 col-lg-4">
+                        <!-- Cta Button Start -->
+                        <div class="cta-btn">
+                            <a class="btn btn-white" href="login-register.html#">+234 920 090 505</a>
+                        </div>
+                        <!-- Cta Button End -->
+                    </div>
+                </div>
+            </div>
+            <!-- Cta Wrap End -->
+        </div>
+    </div>
+    <!-- Cta End -->
+
+{% endblock %}
